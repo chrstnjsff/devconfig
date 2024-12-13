@@ -23,22 +23,10 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ "morhetz/gruvbox" }, -- Gruvbox colorscheme
 		{ "altercation/vim-colors-solarized" }, -- Solarized colorscheme
-		{ "shaunsingh/nord.nvim" }, -- Nord colorscheme
 		{ "catppuccin/nvim", as = "catppuccin" }, -- Catppuccin colorscheme
 		{ "folke/tokyonight.nvim" }, -- Tokyonight colorscheme
-		{ "rose-pine/neovim", as = "rose-pine" }, -- Rose Pine colorscheme
-		{ "rebelot/kanagawa.nvim" }, -- Kanagawa colorscheme
-		{ "EdenEast/nightfox.nvim" }, -- Nightfox colorscheme
-		{ "sainnhe/everforest" }, -- Everforest colorscheme
-		{ "olimorris/onedarkpro.nvim" }, -- One Dark Pro colorscheme
 		{ "Mofiqul/dracula.nvim" }, -- Dracula colorscheme
 		{ "Mofiqul/vscode.nvim" }, -- VS Code Dark+ Light+ inspired theme
-		{ "shaunsingh/solarized.nvim" }, -- Solarized (alternative)
-		{ "marko-cerovac/material.nvim" }, -- Material colorscheme
-		{ "bluz71/vim-nightfly-colors" }, -- Nightfly colorscheme
-		{ "bluz71/vim-moonfly-colors" }, -- Moonfly colorscheme
-		{ "sainnhe/sonokai" }, -- Sonokai colorscheme
-		{ "rafi/awesome-vim-colorschemes" }, -- Collection of colorschemes
 		{ "hashivim/vim-terraform" }, -- Terraform plugin
 		{ "elzr/vim-json" }, -- JSON syntax highlighting
 		{ "stephpy/vim-yaml" }, -- YAML syntax highlighting
@@ -53,7 +41,6 @@ require("lazy").setup({
 		{ "saadparwaiz1/cmp_luasnip" }, -- Snippet completions
 		{ "L3MON4D3/LuaSnip" }, -- Snippet engine
 		{ "rafamadriz/friendly-snippets" }, -- A bunch of snippets to use
-		{ "craftzdog/solarized-osaka.nvim" },
 		{ "chriskempson/vim-tomorrow-theme" },
 		{ "lewis6991/gitsigns.nvim" }, -- Add gitsigns.nvim plugin
 	},
@@ -65,21 +52,10 @@ require("lazy").setup({
 		colorscheme = {
 			"gruvbox",
 			"solarized",
-			"nord",
 			"catppuccin",
 			"tokyonight",
-			"rose-pine",
-			"kanagawa",
-			"nightfox",
-			"everforest",
-			"onedarkpro",
 			"dracula",
 			"vscode",
-			"solarized",
-			"material",
-			"nightfly",
-			"moonfly",
-			"sonokai",
 			"solarized-osaka",
 			"Tomorrow-Night-Eighties",
 		},
@@ -100,7 +76,7 @@ require("lazy").setup({
 })
 
 -- Apply the colorscheme
-vim.cmd("colorscheme catppuccin") -- Change this to any preferred colorscheme from the list
+vim.cmd("colorscheme gruvbox") -- Change this to any preferred colorscheme from the list
 
 -- Apply custom highlight settings
 vim.cmd([[ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=Black gui=NONE guifg=DarkGrey guibg=Black ]])
@@ -175,4 +151,11 @@ require("lspconfig")["terraformls"].setup({
 })
 
 -- Configure gitsigns
-require("gitsigns").setup()
+require("gitsigns").setup({
+	current_line_blame = true, -- Enable blame information
+	current_line_blame_opts = {
+		delay = 1000, -- Delay in milliseconds before blame info is shown
+		virt_text_pos = "eol", -- Position of the blame info
+	},
+	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+})
