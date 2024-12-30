@@ -1,5 +1,4 @@
 {
-    // Keeping most of your existing settings but adjusting sizes
     
     // Typography adjustments for Retina display
     "editor.fontSize": 13,
@@ -42,7 +41,7 @@
     "editor.lineNumbers": "off",
     "editor.guides.indentation": false,
 
-    // Your existing noise reduction settings
+    // existing noise reduction settings
     "breadcrumbs.enabled": false,
     "scm.diffDecorations": "none",
     "editor.hover.delay": 1500,
@@ -61,7 +60,6 @@
     "editor.renderControlCharacters": false,
     "editor.hideCursorInOverviewRuler": true,
     
-    // Keep all your existing formatter settings
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
@@ -74,14 +72,12 @@
         "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
     },
     
-    // Your existing theme settings
     "workbench.colorTheme": "React Theme",
     "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": false,
     
-    // Terminal settings for font and icon rendering
     "terminal.integrated.fontFamily": "MesloLGS NF, Menlo, Monaco, 'Courier New', monospace",
     "terminal.integrated.gpuAcceleration": "on",
     "terminal.integrated.shellIntegration.decorationsEnabled": "both"
