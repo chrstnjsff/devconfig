@@ -1,47 +1,20 @@
+-- lua/config/keymaps.lua
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-keymap.set("n", "x", '"_x')
+-- LSP formatting
+keymap.set("n", "<leader>fm", vim.lsp.buf.format, opts)
 
--- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
+-- Telescope file navigation
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+keymap.set("n", "<leader>fp", "<cmd>Telescope live_grep<cr>", opts)
 
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+-- Buffer navigation
+keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", opts)
+keymap.set("n", "<leader>bp", "<cmd>bprevious<cr>", opts)
 
--- Save file and quit
-keymap.set("n", "<Leader>w", ":update<Return>", opts)
-keymap.set("n", "<Leader>q", ":quit<Return>", opts)
-keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous Buffer" })
 
--- File explorer with NvimTree
-keymap.set("n", "<Leader>f", ":NvimTreeFindFile<Return>", opts)
-keymap.set("n", "<Leader>t", ":NvimTreeToggle<Return>", opts)
-
--- Tabs
-keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
-keymap.set("n", "tw", ":tabclose<Return>", opts)
-
--- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
-
--- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
-
--- Resize window
-keymap.set("n", "<C-S-h>", "<C-w><")
-keymap.set("n", "<C-S-l>", "<C-w>>")
-keymap.set("n", "<C-S-k>", "<C-w>+")
-keymap.set("n", "<C-S-j>", "<C-w>-")
-
--- Diagnostics
-keymap.set("n", "<C-j>", function()
-	vim.diagnostic.goto_next()
-end, opts)
+-- Add to existing keymaps:
+keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", opts)
