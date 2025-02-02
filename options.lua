@@ -30,6 +30,10 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
 vim.opt.mouse = ""
+vim.opt.showtabline = 0
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
+
+vim.opt.hidden = true -- Allow background buffers
+vim.opt.showtabline = 0 -- No tab bar
