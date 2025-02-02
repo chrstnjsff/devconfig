@@ -1,38 +1,21 @@
--- treesitter.lua
-require("lazy").setup({
+-- lua/config/plugins/treesitter.lua
+return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				"lua",
+				"python",
+				"javascript",
+				"typescript",
+				"html",
+				"css",
+				"hcl",
+				"terraform",
+				"yaml",
+			},
+			auto_install = true,
+		},
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"c",
-					"lua",
-					"vim",
-					"vimdoc",
-					"query",
-					"elixir",
-					"heex",
-					"javascript",
-					"html",
-					"terraform",
-					"python",
-					"json",
-					"yaml",
-					"hcl",
-				},
-				sync_install = false,
-				auto_install = true, -- Automatically install missing parsers when entering buffer
-				ignore_install = {}, -- Specify parsers to ignore installing
-				modules = {}, -- Additional modules configuration
-				highlight = { enable = true },
-				indent = { enable = true },
-				additional_vim_regex_highlighting = false,
-			})
-		end,
 	},
-})
-
-return {
-	{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
 }
