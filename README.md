@@ -1,4 +1,4 @@
-# DevConfig
+# dotfiles
 
 This repository contains all of my personal development environment configurations, including:
 - **Neovim/LazyVim**: My custom Neovim setup with Lua configurations for an enhanced coding experience
