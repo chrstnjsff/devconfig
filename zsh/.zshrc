@@ -1,4 +1,3 @@
-
 # Core Configuration
 export ZSH="$HOME/.oh-my-zsh"
 
