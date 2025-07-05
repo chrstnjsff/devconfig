@@ -1,0 +1,11 @@
+theme = tokyonight-storm
+font-family = CaskaydiaCove Nerd Font
+font-size = 15
+gtk-titlebar = false
+
+# These are important for proper color support
+mouse-hide-while-typing = true
+
+background = #1a1b26
+foreground = #9ece6a
+
