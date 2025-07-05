@@ -34,9 +34,22 @@ return {
 	-- Mason-lspconfig bridge
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "mason.nvim" },
+		dependencies = {
+			"mason.nvim",
+			"nvim-lspconfig",
+		},
 		opts = {
 			automatic_installation = true,
+			ensure_installed = {
+				"lua_ls",
+				"terraformls",
+				"tsserver",
+				"cssls",
+				"html",
+				"jsonls",
+				"yamlls",
+				"pyright",
+			},
 		},
 	},
 }

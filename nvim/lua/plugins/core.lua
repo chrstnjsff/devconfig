@@ -7,8 +7,7 @@ return {
 		priority = 1000,
 	},
 
-	-- Disable problematic plugins
-	{ "saghen/blink.cmp", enabled = false },
+	-- Only disable these if they cause issues
 	{ "altercation/vim-colors-solarized", enabled = false },
 	{ "chriskempson/vim-tomorrow-theme", enabled = false },
 }
