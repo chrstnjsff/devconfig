@@ -5,25 +5,81 @@ local opts = { noremap = true, silent = true }
 -- LSP formatting
 keymap.set("n", "<leader>fm", vim.lsp.buf.format, opts)
 
--- Telescope file navigation
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
-keymap.set("n", "<leader>fp", "<cmd>Telescope live_grep<cr>", opts)
+-- Telescope file navigation (using functions to ensure telescope is loaded)
+keymap.set("n", "<leader>ff", function()
+	require("telescope.builtin").find_files()
+end, { desc = "Find Files" })
 
--- Buffer navigation
+keymap.set("n", "<leader>fg", function()
+	require("telescope.builtin").live_grep()
+end, { desc = "Live Grep" })
+
+keymap.set("n", "<leader>fb", function()
+	require("telescope.builtin").buffers()
+end, { desc = "Buffers" })
+
+keymap.set("n", "<leader>fh", function()
+	require("telescope.builtin").help_tags()
+end, { desc = "Help Tags" })
+
+keymap.set("n", "<leader>sk", function()
+	require("telescope.builtin").keymaps()
+end, { desc = "Search Keymaps" })
+
+-- Additional useful Telescope keymaps
+keymap.set("n", "<leader>fd", function()
+	require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") })
+end, { desc = "Find Files in Current Directory" })
+
+keymap.set("n", "<leader>fc", function()
+	require("telescope.builtin").find_files({ cwd = vim.fn.getcwd() })
+end, { desc = "Find Files in Root" })
+
+keymap.set("n", "<leader>fr", function()
+	require("telescope.builtin").oldfiles()
+end, { desc = "Recent Files" })
+
+-- Directory browser function
+local function browse_directories()
+	require("telescope.builtin").find_files({
+		prompt_title = "Browse Directories",
+		find_command = { "find", ".", "-type", "d", "-not", "-path", "*/.*" },
+		attach_mappings = function(prompt_bufnr, map)
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
+
+			actions.select_default:replace(function()
+				local selection = action_state.get_selected_entry()
+				actions.close(prompt_bufnr)
+				vim.cmd("cd " .. selection.value)
+				vim.notify("Changed directory to: " .. selection.value)
+			end)
+			return true
+		end,
+	})
+end
+
+keymap.set("n", "<leader>fD", browse_directories, { desc = "Browse and Change Directory" })
+
+-- Buffer navigation (using different keys to avoid Tab conflicts)
 keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", opts)
 keymap.set("n", "<leader>bp", "<cmd>bprevious<cr>", opts)
-keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
-keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous Buffer" })
+
+-- Use different keys for buffer navigation to avoid conflicts with completion
+keymap.set("n", "<A-l>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
+keymap.set("n", "<A-h>", "<cmd>bprevious<CR>", { desc = "Previous Buffer" })
 
 -- Neo-tree
 keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", opts)
 
--- Telescope keymaps (additional)
-local builtin = require("telescope.builtin")
-keymap.set("n", "<C-p>", builtin.find_files, {})
-keymap.set("n", "<leader>fg", builtin.live_grep, {})
-keymap.set("n", "<leader>fb", builtin.buffers, {})
-keymap.set("n", "<leader>fh", builtin.help_tags, {})
+-- Alternative Telescope keymap
+keymap.set("n", "<C-p>", function()
+	require("telescope.builtin").find_files()
+end, { desc = "Find Files" })
+
+-- Quick directory navigation
+keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<cr><cmd>pwd<cr>", { desc = "Change to file directory" })
+keymap.set("n", "<leader>cD", "<cmd>cd -<cr><cmd>pwd<cr>", { desc = "Change to previous directory" })
 
 -- Zoom function (tmux-like zoom)
 local zoomed = false
